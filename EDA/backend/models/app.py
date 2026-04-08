@@ -1,11 +1,15 @@
 import joblib as jb
 import pandas as pd
 from fastapi import FastAPI
-
+import os
 app = FastAPI()
 
 
+
 try:
+
+    precautions_df = pd.read_csv(r"C:\Users\anasm\Documents\MediMindAI\datasets\symptom_precaution.csv")
+    description_df = pd.read_csv(r"C:\Users\anasm\Documents\MediMindAI\datasets\symptom_Description.csv")
     sym_list = jb.load("symptoms_list.joblib")
     model = jb.load("disease_prediction_model.joblib")
     @app.get("/")
@@ -23,7 +27,27 @@ try:
                 vector[index] = 1
                 
         prediction = model.predict([vector])
-        return {"predicted_disease": prediction[0]}
+        
+                
+        if prediction[0] in description_df['Disease'].values.tolist():
+            description = description_df['Disease'].values.tolist().index(prediction[0])
+            precaution=[]
+            for i in precautions_df.columns[1:]:
+                    if precautions_df[i].notnull().any():
+                        index = precautions_df['Disease'].values.tolist().index(prediction[0])
+                        precaution.append(precautions_df[i][index])
+
+            return {
+                "disease": prediction[0],
+                "description": description_df['Description'][description],
+                "precaution": precaution,
+                "note": "This is not a medical diagnosis. Please consult a doctor."
+                #"Precautions": precautions_df[precautions_df['Disease'] == prediction[0]].iloc[:, 1:].values.flatten().tolist()
+            }
+                                                    
+        else:
+            return "Disease not found in the database."
+            
             
 except Exception as e:
     print(f"Error occurred: {e}")
