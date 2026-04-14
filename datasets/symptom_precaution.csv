@@ -40,3 +40,19 @@ Pneumonia,consult doctor,medication,rest,follow up
 Arthritis,exercise,use hot and cold therapy,try acupuncture,massage
 Gastroenteritis,stop eating solid food for while,try taking small sips of water,rest,ease back into eating
 Tuberculosis,cover mouth,consult doctor,medication,rest
+COVID-19,Wear a mask,Maintain social distancing,Wash hands frequently,Isolate if symptomatic
+Dengue,Use mosquito repellents,Clear stagnant water,Drink plenty of fluids,Rest
+Diabetes Type 2,Monitor blood sugar,Eat a balanced diet,Exercise regularly,Take prescribed medication
+Hypertension,Reduce sodium intake,Exercise regularly,Manage stress,Monitor blood pressure
+Asthma,Use inhaler as prescribed,Avoid known triggers,Stay away from smoke,Keep air clean
+Migraine,Rest in a dark room,Stay hydrated,Avoid loud noises,Take pain relievers
+Tuberculosis,Take full course of antibiotics,Cover mouth when coughing,Ventilate rooms,Wear a mask
+Anemia,Eat iron-rich foods,Take iron supplements,Consume vitamin C,Consult a doctor
+Gastroenteritis,Drink oral rehydration solutions,Eat bland foods,Wash hands thoroughly,Rest
+Pneumonia,Take prescribed antibiotics,Rest extensively,Drink plenty of fluids,Use a humidifier
+Appendicitis,Seek immediate medical help,Do not eat or drink,Avoid pain meds before diagnosis,Prepare for possible surgery
+Hypothyroidism,Take thyroid medication daily,Eat a healthy diet,Get regular exercise,Monitor hormone levels
+Chronic Kidney Disease,Control blood pressure,Manage blood sugar,Eat a low-salt diet,Avoid NSAID painkillers
+Osteoarthritis,Maintain a healthy weight,Do low-impact exercises,Use hot/cold therapy,Take anti-inflammatory meds
+Malaria,Consult a doctor immediately,Take antimalarial drugs,Use mosquito nets,Rest
+Food Poisoning,Stay hydrated,Rest your stomach,Ease back into eating,Avoid dairy and caffeine

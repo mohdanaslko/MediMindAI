@@ -1,7 +1,12 @@
-python-multipart
-pandas
-scikit-learn
-joblib
 fastapi
 uvicorn
-aiofiles
+pydantic
+google-genai
+langchain-community
+langchain-huggingface
+langchain-chroma
+chromadb
+pandas
+sentence-transformers
+python-dotenv
+requests
