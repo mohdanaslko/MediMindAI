@@ -34,16 +34,20 @@ async def serve_ui():
 
 print("⏳ Loading Medical Brain (RAG Database)...")
 
+vectorstore = None  # default
+
 try:
-    embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
+    embeddings = HuggingFaceEmbeddings(
+        model_name="all-MiniLM-L6-v2",
+        model_kwargs={'device': 'cpu'}
+    )
     vectorstore = Chroma(
         persist_directory="./medical_db",
         embedding_function=embeddings
     )
-    print("✅ Medical Brain Loaded! MediMind Server is ready.")
+    print("✅ Medical Brain Loaded!")
 except Exception as e:
     print(f"❌ Error loading database: {e}")
-    vectorstore = None
 
 
 class UserInput(BaseModel):
