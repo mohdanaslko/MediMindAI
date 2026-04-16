@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse, JSONResponse
 from pydantic import BaseModel
 from google import genai
 from langchain_chroma import Chroma
@@ -24,13 +24,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# ── Serve static files (HTML, CSS, JS) from the /static folder ──
-app.mount("/static", StaticFiles(directory="static"), name="static")
-
-# ── Serve index.html at root so http://127.0.0.1:8000 opens the UI ──
-@app.get("/")
-async def serve_ui():
-    return FileResponse("static/index.html")
+# ── Serve static files only if the folder exists ──
+STATIC_DIR = "static"
+if os.path.isdir(STATIC_DIR):
+    app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
 
 print("⏳ Loading Medical Brain (RAG Database)...")
 
@@ -38,11 +35,11 @@ vectorstore = None  # default
 
 try:
     embeddings = GoogleGenerativeAIEmbeddings(
-    model="models/gemini-embedding-001",
-    google_api_key=GEMINI_API_KEY,
-    client_options={"api_endpoint": "generativelanguage.googleapis.com"},
-    transport="rest"
-)
+        model="models/gemini-embedding-001",
+        google_api_key=GEMINI_API_KEY,
+        client_options={"api_endpoint": "generativelanguage.googleapis.com"},
+        transport="rest"
+    )
     vectorstore = Chroma(
         persist_directory="./medical_db",
         embedding_function=embeddings
@@ -50,6 +47,21 @@ try:
     print("✅ Medical Brain Loaded!")
 except Exception as e:
     print(f"❌ Error loading database: {e}")
+
+
+# ── Health check — handles GET and HEAD (required by Render) ──
+@app.api_route("/health", methods=["GET", "HEAD"])
+async def health_check():
+    return JSONResponse({"status": "ok"})
+
+
+# ── Serve index.html at root — handles GET and HEAD ──
+@app.api_route("/", methods=["GET", "HEAD"])
+async def serve_ui():
+    index_path = os.path.join(STATIC_DIR, "index.html")
+    if os.path.exists(index_path):
+        return FileResponse(index_path)
+    return JSONResponse({"status": "MediMind API is running. No frontend found."})
 
 
 class UserInput(BaseModel):
