@@ -6,11 +6,11 @@ MediMindAI is an advanced healthcare solution that uses **Retrieval-Augmented Ge
 - **RAG Implementation:** Uses LangChain to query a custom medical vector database for accurate symptom-to-disease mapping.
 - **Multi-Modal Analysis:** Capable of analyzing medical reports and asking intelligent follow-up questions.
 - **LLM Integration:** Powered by Google Gemini API for natural, context-aware conversations.
-- **Vector Search:** Efficient document retrieval using [Mention your Vector DB, e.g., FAISS or ChromaDB].
+- **Vector Search:** Efficient document retrieval using ChromaDB.
 
 ## 🛠️ Tech Stack
 - **AI/ML:** Python, LangChain, Google Gemini Pro API
-- **Web Framework:** Flask (based on your `app.py`)
+- **Web Framework:** FastAPI
 - **Data:** RAG-based Vector Store
 - **Frontend:** HTML5, CSS3, JavaScript
 
@@ -19,7 +19,7 @@ To run this locally:
 1. Clone the repo: `git clone https://github.com/mohdanaslko/MediMindAI.git`
 2. Install dependencies: `pip install -r requirements.txt`
 3. Set up your `.env` file with your `GEMINI_API_KEY`.
-4. Run the app: `python app.py`
+4. Run the app: `python -m uvicorn app:app --reload`
 
 ---
 *Disclaimer: This tool is for educational purposes and is not a substitute for professional medical diagnosis.*
