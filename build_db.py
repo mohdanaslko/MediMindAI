@@ -1,7 +1,9 @@
 import pandas as pd
-from langchain_community.vectorstores import Chroma
+from langchain_chroma import Chroma
 from langchain_core.documents import Document
 from langchain_huggingface import HuggingFaceEmbeddings
+import os
+#os.environ['HF_ENDPOINT'] = 'https://hf-mirror.com'
 
 print("⏳ Reading medical CSV files...")
 
@@ -44,7 +46,10 @@ print("⏳ Downloading local AI model and building database (first time takes a 
 # 3. BUILD AND SAVE THE LOCAL VECTOR DATABASE
 # ---------------------------------------------------------
 # Using a powerful, free, offline sentence transformer
-embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
+embeddings = HuggingFaceEmbeddings(
+    model_name="all-MiniLM-L6-v2",
+    model_kwargs={'device': 'cpu'}
+)
 
 # Create the database and save it locally
 vectorstore = Chroma.from_documents(

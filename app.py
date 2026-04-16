@@ -78,7 +78,7 @@ async def chat_with_medimind(user_request: UserInput):
         full_prompt = f"{system_prompt}\n\nPatient says: {user_request.message}"
 
         response = client.models.generate_content(
-            model='gemini-2.5-flash',
+            model='gemini-2.5-flash-lite',
             contents=full_prompt
         )
 

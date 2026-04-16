@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="static/banner.jpg" alt="MediMindAI Banner" width="100%">
+</p>
+
 # 🏥 MediMindAI: RAG-Powered Healthcare Assistant
 
 MediMindAI is an advanced healthcare solution that uses **Retrieval-Augmented Generation (RAG)** to provide intelligent disease prediction and medical insights. By combining **Google Gemini Pro** with **LangChain**, it ensures responses are grounded in verified medical datasets.
