@@ -5,7 +5,7 @@ from fastapi.responses import FileResponse
 from pydantic import BaseModel
 from google import genai
 from langchain_chroma import Chroma
-from langchain_huggingface import HuggingFaceEmbeddings
+from langchain_google_genai import GoogleGenerativeAIEmbeddings
 import os
 from dotenv import load_dotenv
 
@@ -37,10 +37,12 @@ print("⏳ Loading Medical Brain (RAG Database)...")
 vectorstore = None  # default
 
 try:
-    embeddings = HuggingFaceEmbeddings(
-        model_name="all-MiniLM-L6-v2",
-        model_kwargs={'device': 'cpu'}
-    )
+    embeddings = GoogleGenerativeAIEmbeddings(
+    model="models/gemini-embedding-001",
+    google_api_key=GEMINI_API_KEY,
+    client_options={"api_endpoint": "generativelanguage.googleapis.com"},
+    transport="rest"
+)
     vectorstore = Chroma(
         persist_directory="./medical_db",
         embedding_function=embeddings

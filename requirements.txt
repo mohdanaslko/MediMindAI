@@ -3,7 +3,7 @@ uvicorn
 python-dotenv
 google-genai
 langchain-chroma
-langchain-huggingface
+langchain-google-genai
 sentence-transformers
 chromadb
 pandas

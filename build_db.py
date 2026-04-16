@@ -1,8 +1,17 @@
+from google import genai
 import pandas as pd
 from langchain_chroma import Chroma
 from langchain_core.documents import Document
-from langchain_huggingface import HuggingFaceEmbeddings
+from langchain_google_genai import GoogleGenerativeAIEmbeddings
 import os
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv()
+
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+client = genai.Client(api_key=GEMINI_API_KEY)
+#print(client.models.list())
 #os.environ['HF_ENDPOINT'] = 'https://hf-mirror.com'
 
 print("⏳ Reading medical CSV files...")
@@ -46,9 +55,11 @@ print("⏳ Downloading local AI model and building database (first time takes a 
 # 3. BUILD AND SAVE THE LOCAL VECTOR DATABASE
 # ---------------------------------------------------------
 # Using a powerful, free, offline sentence transformer
-embeddings = HuggingFaceEmbeddings(
-    model_name="all-MiniLM-L6-v2",
-    model_kwargs={'device': 'cpu'}
+embeddings = GoogleGenerativeAIEmbeddings(
+    model="models/gemini-embedding-001",
+    google_api_key=GEMINI_API_KEY,
+    client_options={"api_endpoint": "generativelanguage.googleapis.com"},
+    transport="rest"
 )
 
 # Create the database and save it locally
