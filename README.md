@@ -27,3 +27,6 @@ To run this locally:
 
 ---
 *Disclaimer: This tool is for educational purposes and is not a substitute for professional medical diagnosis.*
+## 🚀 Live Demo
+You can try the live version of MediMindAI here: 
+[![Live Demo](https://img.shields.io/badge/Demo-Live%20Now-brightgreen?style=for-the-badge&logo=render)](https://medimindai-3qaa.onrender.com)
