@@ -8,7 +8,7 @@ from langchain_chroma import Chroma
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
 import os
 from dotenv import load_dotenv
-
+import uvicorn
 # Load environment variables
 load_dotenv()
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
@@ -94,3 +94,5 @@ async def chat_with_medimind(user_request: UserInput):
         error_msg = str(e)
         print(f"❌ Error: {error_msg}")
         return {"reply": f"Error connecting to brain: {error_msg}"}
+    if __name__ == "__main__":
+        uvicorn.run(app, host="0.0.0.0", port=7860)
