@@ -1,3 +1,13 @@
+---
+title: EduTutor
+emoji: 📚
+colorFrom: blue
+colorTo: green
+sdk: docker
+pinned: false
+app_port: 7860
+---
+
 <p align="center">
   <img src="static/banner.jpg" alt="MediMindAI Banner" width="100%">
 </p>
